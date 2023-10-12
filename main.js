@@ -1,16 +1,18 @@
 leftWristX = 0;
 rightWristX = 0;
-difference = 0;
+difference = 50;
 
 function setup(){
+    canvas = createCanvas(550, 500);
+    canvas.position(550,150);
+
     video = createCapture(VIDEO);
     video.size(550,500);
 
-    canvas = createCanvas(550, 500);
-    canvas.position(560,150);
-
     poseNet = ml5.poseNet(video, modelLoaded);
     poseNet.on('pose'. gotPoses);
+
+  
 }
 
 function modelLoaded(){
@@ -19,9 +21,9 @@ function modelLoaded(){
 
 function draw(){
     background('#969A97');
-    textSize(20);
+    textSize(difference);
     fill(50);
-    text('Precious', 10, 10);
+    text('Precious', 50, 400);
 }
 
 function gotPoses(results){
@@ -33,6 +35,6 @@ function gotPoses(results){
         difference = floor(leftWristX - rightWristX);
 
         console.log("leftWristX = " + leftWristX + " rightWristX = "+ rightWristX + " difference = " + difference);
- 
+        document.getElementById('square_side').innerHTML = 'font size of the text will be' + difference;
     }
 }
